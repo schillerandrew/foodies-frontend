@@ -1,0 +1,97 @@
+:root{
+  --neon-text: #FFC15E;
+  --neon-border: #9A031E;
+}
+
+body{
+  background-color: hsl(44, 31%, 50%);}
+
+h2{
+  font-size: 6rem;
+  font-family: 'Abril Fatface', cursive;
+}
+
+
+/* Header Navbar Design */
+nav{
+  font-family: 'Pacifico', cursive;
+  height: 12vh;
+  min-width: 1050px;
+  background-color: #050517;
+}
+.navbar{
+  display: flex;
+  justify-content: space-between;
+}
+.navGrouping{
+  display: flex;
+}
+.navbar-brand{
+  font-size: 2rem;
+  margin: 0 1em;
+  padding: .2em .5em;
+  color: var(--neon-text) !important;
+  border: 0.125em solid var(--neon-border);
+  border-radius: 0.25em;
+  text-shadow: 
+  0 0 0.1em hsl(0, 0%, 100%),
+  0 0 0.5em currentColor;
+  box-shadow: 
+  0 0 0.05em hsl(0, 0%, 100%),
+  0 0 1em var(--neon-border),
+  inset 0 0 .6em var(--neon-border);
+  transform: rotate(-10deg);
+}
+.nav-item{
+  font-size: 2rem;
+  margin-right: 1em;
+  text-shadow: 
+  0 0 0.05em hsl(0, 0%, 100%),
+  0 0 .6em var(--neon-text);
+}
+.nav-item:hover{
+  transform: scale(1.1);
+}
+.nav-link{
+  color: var(--neon-text) !important;
+}
+.btn{
+  font-size: 1.2rem;
+  margin-right: 1em;
+  color: var(--neon-text) !important;
+  text-shadow: 
+  0 0 0.05em hsl(0, 0%, 100%),
+  0 0 .6em var(--neon-text);;
+}
+.btn:hover{
+  border: 0.125em solid var(--neon-border);
+  border-radius: .5em;
+  box-shadow: 
+  0 0 0.05em hsl(0, 0%, 100%),
+  0 0 1em var(--neon-border),
+  inset 0 0 .6em var(--neon-border);
+  transform: scale(1.1);
+  transition: 500ms ease-in-out;
+}
+
+
+/* Landing Page Design */
+.pizza-img{
+  height: 88vh;
+}
+.intro{
+  background-color: hsl(44, 31%, 88%);
+  width: 80vw;
+  min-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.intro-text{
+  display: flex;
+  align-items:flex-end;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 700px;
+  padding: 5em;
+}
