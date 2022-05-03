@@ -1,11 +1,14 @@
 import React from "react";
-import { Button, Carousel } from "react-bootstrap";
+import { Button, Carousel, Modal } from "react-bootstrap";
+import ReviewModal from "./ReviewModal";
 
 class Explore extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: 'test'
+      showModal: false,
+      showUpdateModal: false,
+      storeData: {}
     }
   }
 
@@ -15,6 +18,18 @@ class Explore extends React.Component {
 
   findClicked = (e) => {
     this.props.handleLocationSubmit(e);
+  }
+
+  showModal = () => {
+    this.setState({
+      showUpdateModal: true
+    })
+  }
+
+  hideModalHandler = () => {
+    this.setState({
+      showUpdateModal: false
+    })
   }
 
   render() {
@@ -27,7 +42,7 @@ class Explore extends React.Component {
             onInput={this.searchEntry}
             placeholder="Search... "
           />
-          <Button type="submit">Find!</Button>
+          <Button type="submit"><i className="fa-solid fa-magnifying-glass"></i> Find!</Button>
         </form>
         <Carousel
           style={{
@@ -39,15 +54,42 @@ class Explore extends React.Component {
         {this.props.yelpData.map((data, id) => {
           return (
             <Carousel.Item key={id}>
+              <div className="mask1">
               <img
-                className="d-block w-100"
+                className="d-block w-100 carouselImg"
                 src={data.image_url}
                 alt={data.name}
-              />
+                />
+                </div>
+              <Carousel.Caption>
+                <h3>{data.name}</h3>
+                <p>{data.location.address1} {data.location.city},{data.location.state} {data.location.zip_code}</p>
+                <Button><i className="fa-regular fa-star"></i></Button>
+                <Button
+                  onClick={() => this.setState({ showUpdateModal: true, storeData: data })}
+                >Review <i className="fa-solid fa-pen"></i></Button>
+              </Carousel.Caption>
             </Carousel.Item>
           )
         })}
         </Carousel>
+        <Modal
+          show={this.state.showUpdateModal}
+          onHide={this.hideModalHandler}
+        >
+          <Modal.Header closeButton>
+            <img
+            className="modalImg" 
+              src={this.state.storeData.image_url} 
+              alt={this.state.storeData.name}
+            />
+            {this.state.storeData.name}
+          </Modal.Header>
+          <ReviewModal
+            title={this.state.storeData}
+            hideModalHandler={this.hideModalHandler}
+          />
+        </Modal>
       </>
     )
   }
