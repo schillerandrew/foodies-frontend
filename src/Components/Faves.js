@@ -9,45 +9,45 @@ class Faves extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showTheDeleteModal: false,
-      showTheUpdateModal: false,
-      showThePhotoModal: false
+      showDelete: false,
+      showUpdate: false,
+      showPhoto: false
     }
   }
 
-  hideTheDeleteModal = () => {
+  hideDeleteModalHandler = () => {
     this.setState({
-      showTheDeleteModal: false
+      showDelete: false
     });
   }
 
-  showTheDeleteModal = () => {
+  showDeleteModalHandler = () => {
     this.setState({
-      showTheDeleteModal: true,
+      showDelete: true,
     });
   }
 
-  hideTheUpdateModal = () => {
+  hideUpdateModalHandler = () => {
     this.setState({
-      showTheUpdateModal: false,
+      showUpdate: false,
     });
   }
 
-  showTheUpdateModal = () => {
+  showUpdateModalHandler = () => {
     this.setState({
-      showTheUpdateModal: true,
+      showUpdate: true,
     });
   }
 
-  hideThePhotoModal = () => {
+  hidePhotoModalHandler = () => {
     this.setState({
-      showThePhotoModal: true,
+      showPhoto: false,
     });
   }
 
-  showThePhotoModal = () => {
+  showPhotoModalHandler = () => {
     this.setState({
-      showThePhotoModal: true,
+      showPhoto: true,
     });
   }
 
@@ -57,8 +57,8 @@ class Faves extends React.Component {
         {/* this is the modal to confirm delete */}
         <Modal
           className="img-responsive"
-          show={this.state.showTheDeleteModal}
-          onHide={this.hideTheDeleteModal}
+          show={this.state.showDelete}
+          onHide={this.hideDeleteModalHandler}
         >
           <Modal.Header closeButton>
             <Modal.Title>Are you sure you want to delete this?
@@ -67,11 +67,11 @@ class Faves extends React.Component {
           <Modal.Body>
             <Button
               variant="primary"
-              onClick={this.hideTheDeleteModal}
+              onClick={this.hideDeleteModalHandler}
             > Yep!</Button>
             <Button
               variant="danger"
-              onClick={this.hideTheDeleteModal}
+              onClick={this.hideDeleteModalHandler}
             > Nope!</Button>
           </Modal.Body>
         </Modal>
@@ -79,8 +79,8 @@ class Faves extends React.Component {
         {/* this is the modal to update a review */}
         <Modal
           className="img-responsive"
-          show={this.state.showTheUpdateModal}
-          onHide={this.hideTheUpdateModal}
+          show={this.state.showUpdate}
+          onHide={this.hideUpdateModalHandler}
         >
           <Modal.Header closeButton>
             <Modal.Title>Update your review
@@ -101,10 +101,22 @@ class Faves extends React.Component {
 
         {/* this is the modal to show an enlarged photo */}
         <Modal
-          show={this.state.showThePhotoModal}
-          onHide={this.hideThePhotoModal}
+          className="img-responsive"
+          show={this.state.showPhoto}
+          onHide={this.hidePhotoModalHandler}
         >
           <Modal.Header closeButton></Modal.Header>
+          <Modal.Body>
+            <Card>
+              <Card.Body>
+                <Card.Img
+                  variant="top"
+                  src="http://placehold.jp/500x500.png"
+                // className='img-fluid'
+                />
+                </Card.Body>
+            </Card>
+          </Modal.Body>
         </Modal>
         <Accordion defaultActiveKey="0">
 
@@ -125,7 +137,7 @@ class Faves extends React.Component {
                   {/* button = delete restaurant */}
                   <Button
                     variant="dark"
-                    onClick={this.showTheDeleteModal}
+                    onClick={this.showDeleteModalHandler}
                   >
                     <i className="fa fa-trash-o"> Spot</i>
                   </Button>
@@ -145,14 +157,14 @@ class Faves extends React.Component {
                   {/* button = update review */}
                   <Button
                     variant="primary"
-                    onClick={this.showTheUpdateModal}
+                    onClick={this.showUpdateModalHandler}
                   >
                     <i className="fa fa-pencil"> Thoughts</i>
                   </Button>
                   {/* button = delete review */}
                   <Button
                     variant="primary"
-                    onClick={this.showTheDeleteModal}
+                    onClick={this.showDeleteModalHandler}
                   >
                     <i className="fa fa-trash-o"> Thoughts</i>
                   </Button>
@@ -160,28 +172,31 @@ class Faves extends React.Component {
                   {/* photo slot */}
                   <Card.Img
                     variant="left"
-                    onClick=
+                    onClick={this.showPhotoModalHandler}
                     src="http://placehold.jp/100x100.png"
                   />
                   {/* photo slot */}
                   <Card.Img
                     variant="left"
+                    onClick={this.showPhotoModalHandler}
                     src="http://placehold.jp/100x100.png"
                   />
                   {/* photo slot */}
                   <Card.Img
                     variant="left"
+                    onClick={this.showPhotoModalHandler}
                     src="http://placehold.jp/100x100.png"
                   />
                   {/* photo slot */}
                   <Card.Img
                     variant="left"
+                    onClick={this.showPhotoModalHandler}
                     src="http://placehold.jp/100x100.png"
                   />
                   {/* button = delete photo */}
                   <Button
                     variant="danger"
-                    onClick={this.showTheDeleteModal}
+                    onClick={this.showDeleteModalHandler}
                   >
                     <i className="fa fa-trash-o"> Shots</i></Button>
                 </Card.Body>
