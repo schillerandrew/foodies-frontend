@@ -9,6 +9,7 @@ import Header from './Components/Header'
 import Landing from './Components/Landing';
 import Explore from './Components/Explore';
 import Faves from './Components/Faves';
+import AboutUs from './Components/AboutUs';
 import axios from 'axios';
 
 
@@ -75,6 +76,9 @@ class App extends React.Component{
           <Route path="/Faves">
             <Faves 
             />
+          </Route>
+          <Route path="/AboutUs">
+            <AboutUs/>
           </Route>
         </Switch>
       </Router>
