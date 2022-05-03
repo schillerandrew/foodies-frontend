@@ -9,7 +9,7 @@ class Header extends React.Component{
         <div className="navGrouping">
           <NavItem><a href="/" className="nav-link">Home</a></NavItem>
           <NavItem><a href="/Explore" className="nav-link">Explore</a></NavItem>
-          <NavItem><a href="/Favorites" className="nav-link">Favorites</a></NavItem>
+          <NavItem><a href="/Faves" className="nav-link">My Faves</a></NavItem>
           <NavItem><a href="/AboutUs" className="nav-link">About Us</a></NavItem>
           <Button variant="">
             Log In
