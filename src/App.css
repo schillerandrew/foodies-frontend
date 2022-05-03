@@ -130,3 +130,10 @@ nav{
 .modalImg{
   height: 10vh;
 }
+
+/* About US */
+
+.profiles{
+  display: flex;
+  flex-direction: row;
+}
