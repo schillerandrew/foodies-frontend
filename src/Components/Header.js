@@ -1,5 +1,8 @@
 import React from "react";
-import {Button, Navbar, NavItem } from "react-bootstrap"
+import { withAuth0 } from '@auth0/auth0-react';
+import {Navbar, NavItem } from "react-bootstrap"
+import LoginButton from "./Login";
+import LogoutButton from "./Logout";
 
 class Header extends React.Component{
   render(){
@@ -11,13 +14,13 @@ class Header extends React.Component{
           <NavItem><a href="/Explore" className="nav-link">Explore</a></NavItem>
           <NavItem><a href="/Faves" className="nav-link">My Faves</a></NavItem>
           <NavItem><a href="/AboutUs" className="nav-link">About Us</a></NavItem>
-          <Button variant="">
-            Log In
-          </Button>
+          {this.props.auth0.isAuthenticated
+          ? <LogoutButton/>
+          : <LoginButton/>}
         </div>
       </Navbar>
     )
   }
 }
 
-export default Header;
+export default withAuth0(Header);

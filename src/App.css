@@ -115,8 +115,13 @@ nav{
   justify-content: center;
   margin-top: 1em;
 }
+.slide{
+  margin: 0 auto;
+}
 .carouselImg{
+  max-width: 60vw;
   height: 60vh;
+  margin: 0 auto;
 }
 .mask1 {
   -webkit-mask-image: linear-gradient(rgb(0, 0, 0), transparent);
