@@ -19,8 +19,9 @@ class App extends React.Component{
     this.state = {
       locationName: 'Seattle',
       locationData: {},
-      locationErr: false,
-      dummyLocations: []
+
+      yelpData: [],
+      locationErr: false
     }
   }
 
@@ -35,14 +36,21 @@ class App extends React.Component{
     this.pullLocation();
   }
   
-pullLocation = () => {
+  pullLocation = async () => {
     let locationUrl=`${process.env.REACT_APP_SERVER}/location?q=${this.state.locationName}`
-    console.log(locationUrl);
-    axios.get(locationUrl)
-      .then(locationData => this.setState({locationData: locationData.data[0]}))
-      .catch(err => this.setState({
-        locationErr: true,
-      }));
+    let storeInfo = await axios.get(locationUrl)
+    this.setState({
+      locationData: storeInfo.data[0]
+    })
+    this.yelpDataPull(storeInfo.data[0]);
+ }
+
+ yelpDataPull = (storeInfo) => {
+   let yelpApiUrl = `${process.env.REACT_APP_SERVER}/yelp?lat=${storeInfo.lat}&lon=${storeInfo.lon}`
+   axios.get(yelpApiUrl)
+    .then(yelpData => {
+      this.setState({yelpData: yelpData.data})
+    });
  }
 
   componentDidMount(){
@@ -50,7 +58,6 @@ pullLocation = () => {
   }
 
   render(){
-    console.log(this.state.locationData)
     return (
       <Router>
         <Header/>
@@ -62,6 +69,7 @@ pullLocation = () => {
             <Explore 
               handleLocationSubmit={this.handleLocationSubmit}
               handleSearchEntry={this.handleSearchEntry}
+              yelpData={this.state.yelpData}
             />
           </Route>
           <Route path="/Faves">
