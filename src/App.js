@@ -10,6 +10,7 @@ import Landing from './Components/Landing';
 import Explore from './Components/Explore';
 import Faves from './Components/Faves';
 import axios from 'axios';
+import { withAuth0 } from '@auth0/auth0-react';
 
 
 
@@ -82,4 +83,4 @@ class App extends React.Component{
   }
 }
 
-export default App;
+export default withAuth0(App);
