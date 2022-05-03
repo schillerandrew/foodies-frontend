@@ -8,6 +8,7 @@ import {
 import Header from './Components/Header'
 import Landing from './Components/Landing';
 import Explore from './Components/Explore';
+import Faves from './Components/Faves';
 import axios from 'axios';
 
 
@@ -18,7 +19,8 @@ class App extends React.Component{
     this.state = {
       locationName: 'Seattle',
       locationData: {},
-      locationErr: false
+      locationErr: false,
+      dummyLocations: []
     }
   }
 
@@ -60,6 +62,10 @@ pullLocation = () => {
             <Explore 
               handleLocationSubmit={this.handleLocationSubmit}
               handleSearchEntry={this.handleSearchEntry}
+            />
+          </Route>
+          <Route path="/Faves">
+            <Faves 
             />
           </Route>
         </Switch>
