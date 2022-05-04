@@ -74,7 +74,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.userFaves, this.state.userReviews);
+    // console.log(this.state.userFaves, this.state.userReviews);
     return (
       <Router>
         <Header />
