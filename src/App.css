@@ -132,3 +132,13 @@ nav{
   display: flex;
   flex-direction: row;
 }
+.selfies{
+  border-radius: 8px;
+  height: 70vh;
+  transition: all 1s ease-in-out;
+  opacity: 0.5;
+}
+.selfies:hover{
+ opacity: 1;
+ transition: 1s ease-in-out
+}
