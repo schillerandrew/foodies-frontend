@@ -1,16 +1,26 @@
-.restaurantCard {
+.restaurantheader {
   display: grid;
-  grid-template-columns: 2fr 1fr; 
+  grid-template-columns: repeat(5, 1fr); 
   gap: 10px;
-  border: 1px solid black;
-  width: 50%;
+  grid-auto-rows: minmax(100px, auto);
+  border: 5px solid purple;
 }
 
-.restCard {
-  border: 1px solid black;
-  margin: 10px;
+.restPhoto {
+  border: 3px solid black;
 }
 
-/* .restCard:first-child {
-  margin-right: 10px;
-} */
+.restName {
+}
+
+.deleteRest {
+}
+
+.share {
+}
+
+.restAddy {
+}
+
+
+

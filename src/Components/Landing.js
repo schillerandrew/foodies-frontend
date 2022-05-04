@@ -3,7 +3,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import React from "react";
 import LandingImg from "../Images/landingPhoto.jpg"
-import { getDefaultNormalizer } from "@testing-library/react";
+// import { getDefaultNormalizer } from "@testing-library/react";
 
 class Landing extends React.Component{
 
@@ -30,7 +30,7 @@ class Landing extends React.Component{
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
-        // console.log(jwt);
+        // console.log('jwt=' + jwt);
         const config = {
           method: 'get',
           baseURL: process.env.REACT_APP_SERVER,
