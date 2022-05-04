@@ -7,35 +7,30 @@ import { getDefaultNormalizer } from "@testing-library/react";
 
 class Landing extends React.Component{
 
-  handlePost = async () => {
+  handlePost = async (jwt) => {
     try{
-      console.log(this.props.auth0);
-      let user = {
-        Email: this.props.auth0.user.email
+      const config = {
+        method: 'POST',
+        baseURL: process.env.REACT_APP_SERVER,
+        url: '/userData',
+        headers: {Authorization: `Bearer ${jwt}`},
+        data: {
+          Email: this.props.auth0.user.email
+        }
       }
-      let url = `${process.env.REACT_APP_SERVER}/userData`
-      await axios.post(url, user)
+      await axios(config);
     } catch (err){
       console.log('we have an err');
     }
   }
 
-  // handleSubmit =  => {
-  //   e.preventDefault();
-  //   console.log(e.target);
-  //   let review = {
-  //     YelpData: this.props.storeData,
-  //     Review: e.target.review.value
-  //   }
-  //   this.handlePost(review);
-  // }
 
   checkUser = async () => {
     try {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
-        console.log(jwt);
+        // console.log(jwt);
         const config = {
           method: 'get',
           baseURL: process.env.REACT_APP_SERVER,
@@ -44,25 +39,24 @@ class Landing extends React.Component{
         }
         let result = await axios(config);
         let userHasAccount = false;
-        console.log(result.data);
         if(result.data.length > 0){
-          console.log('here');
           result.data.forEach(obj => {
             if(obj.Email.includes(this.props.auth0.user.email)){
               userHasAccount = true;
             }
           });
         }
-        
         if(!userHasAccount){
-          this.handlePost();
+          this.handlePost(jwt);
         }
+        this.props.storeData(result.data);
       }
     }
     catch (error) {
       console.log('we have an error:')
     }
   }
+
 
   render(){
     return(
