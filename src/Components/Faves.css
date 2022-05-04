@@ -1,0 +1,16 @@
+.restaurantCard {
+  display: grid;
+  grid-template-columns: 2fr 1fr; 
+  gap: 10px;
+  border: 1px solid black;
+  width: 50%;
+}
+
+.restCard {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+/* .restCard:first-child {
+  margin-right: 10px;
+} */
