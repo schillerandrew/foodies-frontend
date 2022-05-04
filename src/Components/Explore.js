@@ -1,4 +1,6 @@
 import React from "react";
+import { withAuth0 } from '@auth0/auth0-react';
+import axios from "axios";
 import { Button, Carousel, Modal } from "react-bootstrap";
 import ReviewModal from "./ReviewModal";
 
@@ -30,6 +32,31 @@ class Explore extends React.Component {
     this.setState({
       showUpdateModal: false
     })
+  }
+
+  storeFav = async ()  => {
+    const res = await this.props.auth0.getIdTokenClaims();
+    const jwt = res.__raw;
+    const get = {
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/userData?email=${this.props.auth0.user.email}`,
+      headers: { Authorization: `Bearer ${jwt}` }
+    }
+    let request = await axios(get);
+    let user = {
+      Email: this.props.auth0.user.email,
+      YelpData: [...request.data[0].YelpData, this.state.storeData] || request.data[0].YelpData,
+      Reviews: request.data[0].Reviews || []
+    }
+    const put = {
+      method: 'PUT',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/userData/${request.data[0]._id}`,
+      headers: { Authorization: `Bearer ${jwt}` },
+      data: user
+    }
+    await axios(put);
   }
 
   render() {
@@ -64,7 +91,7 @@ class Explore extends React.Component {
               <Carousel.Caption>
                 <h3>{data.name}</h3>
                 <p>{data.location.address1} {data.location.city},{data.location.state} {data.location.zip_code}</p>
-                <Button><i className="fa-regular fa-star"></i></Button>
+                <Button onClick={() => {this.setState({storeData: data}); this.storeFav();}}><i className="fa-regular fa-star"></i></Button>
                 <Button
                   onClick={() => this.setState({ showUpdateModal: true, storeData: data })}
                 >Review <i className="fa-solid fa-pen"></i></Button>
@@ -88,6 +115,8 @@ class Explore extends React.Component {
           <ReviewModal
             title={this.state.storeData}
             hideModalHandler={this.hideModalHandler}
+            userFaves={this.props.userFaves}
+            userReviews={this.props.userReviews}
           />
         </Modal>
       </>
@@ -95,4 +124,4 @@ class Explore extends React.Component {
   }
 }
 
-export default Explore;
+export default withAuth0(Explore);
