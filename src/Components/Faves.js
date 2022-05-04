@@ -1,4 +1,8 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Faves.css";
+
+
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -105,16 +109,14 @@ class Faves extends React.Component {
           show={this.state.showPhoto}
           onHide={this.hidePhotoModalHandler}
         >
-          <Modal.Header closeButton></Modal.Header>
+          {/* <Modal.Header closeButton></Modal.Header> */}
           <Modal.Body>
             <Card>
-              <Card.Body>
-                <Card.Img
-                  variant="top"
-                  src="http://placehold.jp/500x500.png"
-                // className='img-fluid'
-                />
-                </Card.Body>
+              <Card.Img
+                variant="top"
+                src="http://placehold.jp/500x500.png"
+              // className='img-fluid'
+              />
             </Card>
           </Modal.Body>
         </Modal>
@@ -125,21 +127,22 @@ class Faves extends React.Component {
           <Accordion.Item eventKey="0">
             <Accordion.Header>User 1</Accordion.Header>
             <Accordion.Body>
-              <Card style={{ width: '18rem' }}>
+              <Card style={{ width: '30rem' }}>
 
-                <Card.Body>
+                <Card.Header className="restaurantCard">
                   <Card.Img
-                    variant="top"
-                    src="http://placehold.jp/500x500.png"
+                    variant="left"
+                    src="http://placehold.jp/100x100.png"
+                    class="restCard Imag"
                   // className='img-fluid'
                   />
-                  <Card.Title>Taco Bell</Card.Title>
+                  <Card.Title class="restCard Name">Taco Bell</Card.Title>
                   {/* button = delete restaurant */}
                   <Button
                     variant="dark"
                     onClick={this.showDeleteModalHandler}
                   >
-                    <i className="fa fa-trash-o"> Spot</i>
+                    <i className="fa fa-trash-o"> Restaurant</i>
                   </Button>
                   {/* button = share*/}
                   <Button
@@ -147,28 +150,34 @@ class Faves extends React.Component {
                   >
                     <i className="fa fa-share"> Share</i>
                   </Button>
-                  <Card.Text>
+                  <Card.Text className="restCard Addy">
                     <i className="fa fa-map-marker"></i> restaurant address
                   </Card.Text>
-                  <Card.Text>
+                  <Card.Text className="restCard Cats">
                     <i className="fa fa-cutlery"></i> restaurant categories
                   </Card.Text>
-                  <Card.Title>💬 Thoughts</Card.Title>
+                </Card.Header>
+                
+                <Card.Body>
+                  <Card.Title>💬 Reviews</Card.Title>
                   {/* button = update review */}
                   <Button
                     variant="primary"
                     onClick={this.showUpdateModalHandler}
                   >
-                    <i className="fa fa-pencil"> Thoughts</i>
+                    <i className="fa fa-pencil"> Reviews</i>
                   </Button>
                   {/* button = delete review */}
                   <Button
                     variant="primary"
                     onClick={this.showDeleteModalHandler}
                   >
-                    <i className="fa fa-trash-o"> Thoughts</i>
+                    <i className="fa fa-trash-o"> Reviews</i>
                   </Button>
-                  <Card.Title><i className="fa fa-camera"></i> Shots</Card.Title>
+                </Card.Body>
+
+                <Card.Footer>
+                  <Card.Title><i className="fa fa-camera"></i> Photos</Card.Title>
                   {/* photo slot */}
                   <Card.Img
                     variant="left"
@@ -199,7 +208,7 @@ class Faves extends React.Component {
                     onClick={this.showDeleteModalHandler}
                   >
                     <i className="fa fa-trash-o"> Shots</i></Button>
-                </Card.Body>
+                </Card.Footer>
               </Card>
             </Accordion.Body>
           </Accordion.Item>
