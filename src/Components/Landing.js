@@ -4,6 +4,7 @@ import axios from 'axios';
 import React from "react";
 import LandingImg from "../Images/landingPhoto.jpg"
 
+
 class Landing extends React.Component{
 
   handlePost = async (jwt) => {
