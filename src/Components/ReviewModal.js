@@ -15,7 +15,6 @@ class ReviewModal extends React.Component{
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(e.target);
     let review = {
       YelpData: this.props.storeData,
       Review: e.target.review.value

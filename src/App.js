@@ -15,71 +15,90 @@ import { withAuth0 } from '@auth0/auth0-react';
 
 
 
-class App extends React.Component{
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       locationName: 'Seattle',
       locationData: {},
-
       yelpData: [],
-      locationErr: false
+      locationErr: false,
+      userFaves: [],
+      userReviews: []
     }
   }
 
-  handleSearchEntry = value =>{
+  handleSearchEntry = value => {
     this.setState({
       locationName: value
     })
   }
 
-  handleLocationSubmit = e =>{
+  handleLocationSubmit = e => {
     e.preventDefault();
     this.pullLocation();
   }
-  
+
   pullLocation = async () => {
-    let locationUrl=`${process.env.REACT_APP_SERVER}/location?q=${this.state.locationName}`
+    let locationUrl = `${process.env.REACT_APP_SERVER}/location?q=${this.state.locationName}`
     let storeInfo = await axios.get(locationUrl)
     this.setState({
       locationData: storeInfo.data[0]
     })
     this.yelpDataPull(storeInfo.data[0]);
- }
+  }
 
- yelpDataPull = (storeInfo) => {
-   let yelpApiUrl = `${process.env.REACT_APP_SERVER}/yelp?lat=${storeInfo.lat}&lon=${storeInfo.lon}`
-   axios.get(yelpApiUrl)
-    .then(yelpData => {
-      this.setState({yelpData: yelpData.data})
-    });
- }
+  yelpDataPull = (storeInfo) => {
+    let yelpApiUrl = `${process.env.REACT_APP_SERVER}/yelp?lat=${storeInfo.lat}&lon=${storeInfo.lon}`
+    axios.get(yelpApiUrl)
+      .then(yelpData => {
+        this.setState({ yelpData: yelpData.data })
+      });
+  }
 
-  componentDidMount(){
+  storeData = (results) => {
+    if (results.length > 0) {
+      results.forEach(obj => {
+        if (obj.Email.includes(this.props.auth0.user.email)) {
+          this.setState({
+            userFaves: obj.YelpData,
+            userReviews: obj.Reviews
+          });
+        }
+      });
+    }
+  }
+
+  componentDidMount() {
     this.pullLocation();
   }
 
-  render(){
+  render() {
+    console.log(this.state.userFaves, this.state.userReviews);
     return (
       <Router>
-        <Header/>
+        <Header />
         <Switch>
           <Route exact path="/">
-            <Landing/>
+            <Landing
+              storeData={this.storeData}
+            />
           </Route>
           <Route path="/Explore">
-            <Explore 
+            <Explore
               handleLocationSubmit={this.handleLocationSubmit}
               handleSearchEntry={this.handleSearchEntry}
               yelpData={this.state.yelpData}
+              userFaves={this.state.userFaves}
+              userReviews={this.state.userReviews}
             />
           </Route>
           <Route path="/Faves">
-            <Faves 
+            <Faves
             />
           </Route>
           <Route path="/AboutUs">
-            <AboutUs/>
+            <AboutUs />
           </Route>
         </Switch>
       </Router>
