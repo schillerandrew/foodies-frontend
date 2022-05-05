@@ -4,8 +4,13 @@
   flex-wrap: wrap;
 }
 
+.buttonDiv {
+  display: flex;
+  justify-content: center;
+}
+
 .button {
-  
+  margin: 50px;
 }
 
 .restaurantheader {
@@ -24,16 +29,27 @@
 
 .restName {
   color: #9A031E;
+  margin-bottom: 20px;
 }
 
 .deleteRest {
-}
-
-.share {
+  /* margin-top: 10px; */
 }
 
 .restAddy {
+  margin-bottom: 30px;
 }
+
+.reviewTitle {
+  color: #9A031E;
+  margin-bottom: 30px;
+}
+
+.reviewText {
+  /* margin-top: 10px; */
+}
+
+
 
 
 
