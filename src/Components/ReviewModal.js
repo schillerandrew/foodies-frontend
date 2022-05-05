@@ -27,6 +27,7 @@ class ReviewModal extends React.Component {
     e.preventDefault();
     const res = await this.props.auth0.getIdTokenClaims();
     const jwt = res.__raw;
+    // console.log(jwt);
     const config = {
       method: 'get',
       baseURL: process.env.REACT_APP_SERVER,
@@ -37,7 +38,7 @@ class ReviewModal extends React.Component {
     let reviewData = {
       storeName: this.props.title.name,
       description: e.target.review.value,
-      img: e.target.image.value
+      // img: e.target.image.value
     }
     let user = {
       Email: this.props.auth0.user.email,
@@ -51,14 +52,16 @@ class ReviewModal extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group className='mb-3' controlId='review'>
-          <Form.Label>review</Form.Label>
-          <Form.Control type='text' placeholder='Enter Review' />
+          <Form.Label>Review</Form.Label>
+          <Form.Control as='textarea' rows="5" placeholder='Description...' />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="image">
+        {/* <Form.Group className="mb-3" controlId="image">
           <FormLabel>Upload</FormLabel>
           <Form.Control type='file' />
-        </Form.Group>
-        <Button className="modalBtn" onClick={this.props.hideModalHandler} type='submit'>Post Review!</Button>
+        </Form.Group> */}
+        <div className='postBtn'>
+          <Button className="modalBtn" onClick={this.props.hideModalHandler} type='submit'>Post Review!</Button>
+        </div>
       </Form>
     )
   }

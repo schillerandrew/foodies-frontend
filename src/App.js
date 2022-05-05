@@ -54,6 +54,7 @@ class App extends React.Component {
       });
   }
 
+
   updateUserData = () => {
 
   }
@@ -73,6 +74,7 @@ class App extends React.Component {
           </Route>
           <Route path="/Explore">
             <Explore
+              locationName={this.state.locationName}
               handleLocationSubmit={this.handleLocationSubmit}
               handleSearchEntry={this.handleSearchEntry}
               yelpData={this.state.yelpData}
