@@ -23,7 +23,10 @@ class Faves extends React.Component {
       showPhoto: false,
       Faves: [],
       Reviews: [],
-      notLoaded: true
+      notLoaded: true,
+      storeData: {},
+      reviewData: {},
+      pageUpdate: true
     }
   }
 
@@ -53,6 +56,70 @@ class Faves extends React.Component {
     }
   }
 
+  handleFaveDelete = async () => {
+    const res = await this.props.auth0.getIdTokenClaims();
+    const jwt = res.__raw;
+    // console.log(jwt);
+    ////// GET
+    const getConfig = {
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/userData?email=${this.props.auth0.user.email}`,
+      headers: { Authorization: `Bearer ${jwt}` }
+    }
+    let getRequest = await axios(getConfig);
+    let newArray = this.state.Faves.filter(restaurant => {
+      return restaurant.name !== this.state.storeData.name;
+    })
+    ////// PUT
+    let user = {
+      Email: this.props.auth0.user.email,
+      YelpData: newArray || [],
+      Reviews: this.state.Reviews || []
+    }
+    const putConfig = {
+      method: 'put',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/userData/${getRequest.data[0]._id}`,
+      headers: { Authorization: `Bearer ${jwt}` },
+      data: user
+    }
+    await axios(putConfig);
+    this.setState({ Faves: newArray });
+  }
+
+  handleReviewDelete = async () => {
+    const res = await this.props.auth0.getIdTokenClaims();
+    const jwt = res.__raw;
+    // console.log(jwt);
+    ////// GET
+    const getConfig = {
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/userData?email=${this.props.auth0.user.email}`,
+      headers: { Authorization: `Bearer ${jwt}` }
+    }
+    let getRequest = await axios(getConfig);
+    let newArray = this.state.Reviews.filter(review => {
+      return review.description !== this.state.reviewData.description;
+    })
+    ////// PUT
+    let user = {
+      Email: this.props.auth0.user.email,
+      YelpData: this.state.Faves || [],
+      Reviews: newArray || []
+    }
+    const putConfig = {
+      method: 'put',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/userData/${getRequest.data[0]._id}`,
+      headers: { Authorization: `Bearer ${jwt}` },
+      data: user
+    }
+    await axios(putConfig);
+    this.setState({ Reviews: newArray });
+  }
+
   // hideDeleteModalHandler = () => {
   //   this.setState({
   //     showDelete: false
@@ -65,41 +132,17 @@ class Faves extends React.Component {
   //   });
   // }
 
-  // hideUpdateModalHandler = () => {
-  //   this.setState({
-  //     showUpdate: false,
-  //   });
-  // }
-
-  // showUpdateModalHandler = () => {
-  //   this.setState({
-  //     showUpdate: true,
-  //   });
-  // }
-
-  // hidePhotoModalHandler = () => {
-  //   this.setState({
-  //     showPhoto: false,
-  //   });
-  // }
-
-  // showPhotoModalHandler = () => {
-  //   this.setState({
-  //     showPhoto: true,
-  //   });
-  // }
-
   render() {
-    console.log(this.state.Reviews);
     return (
       <>
-        <Button
-        onClick={this.getFavesAndReviews}
-        className="button"
-        >Show My Faves!</Button>
+        <div className="buttonDiv">
+          <Button
+            onClick={this.getFavesAndReviews}
+            className="button"
+          >Show My Faves &#38; Raves!</Button>
+        </div>
         {this.state.Faves.length ?
           this.state.Faves.map((data, id) => {
-            console.log(data);
             return (
               <>
                 <Container className="container">
@@ -120,9 +163,8 @@ class Faves extends React.Component {
                             className="restName">{data.name}</Card.Title>
 
                           {/* restaurant ADDRESS */}
-                          <Card.Text className="restAddy">
-                            <i className="fa fa-map-marker"></i> {data.location.display_address[0]}
-                          </Card.Text>
+                          <Card.Title className="restAddy">📍 {data.location.display_address[0]}
+                          </Card.Title>
 
                           {/* this button shares*/}
                           {/* <Button
@@ -134,7 +176,7 @@ class Faves extends React.Component {
 
                           {/* this button deletes a restaurant */}
                           <Button
-                            onClick={this.showDeleteModalHandler}
+                            onClick={() => { this.setState({ storeData: data }); this.handleFaveDelete(); }}
                             className="deleteRest"
                           >
                             <i className="fa fa-trash-o"></i>
@@ -158,14 +200,14 @@ class Faves extends React.Component {
                   <Card style={{ width: '40rem' }}>
                     <Card.Body>
                       <Row>
-                        <Card.Title>💬 Reviews</Card.Title>
+                        <Card.Title >💬 Raves</Card.Title>
                       </Row>
 
                       {/* restaurant review */}
                       <Row>
                         <Col>
-                          <Card.Title>{data.storeName}</Card.Title>
-                          <Card.Text>{data.description}</Card.Text>
+                          <Card.Title className="reviewTitle">{data.storeName}</Card.Title>
+                          <Card.Text className="reviewText">{data.description}</Card.Text>
                         </Col>
                         <Col>
 
@@ -180,7 +222,7 @@ class Faves extends React.Component {
                           {/* this button deletes a review */}
                           <Button
                             variant="primary"
-                            onClick={this.showDeleteModalHandler}
+                            onClick={() => { this.setState({ reviewData: data }); this.handleReviewDelete(); }}
                           >
                             <i className="fa fa-trash-o"></i>
                           </Button>
@@ -232,9 +274,9 @@ class Faves extends React.Component {
                 <Form.Control type="text" placeholder="REVIEW TEXT GOES HERE" />
               </Form.Group>
               <Modal.Footer>
-              <Button variant="primary">
-                Update
-              </Button>
+                <Button variant="primary">
+                  Update
+                </Button>
               </Modal.Footer>
             </Form>
           </Modal.Body>
