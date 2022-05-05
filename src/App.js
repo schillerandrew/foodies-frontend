@@ -23,8 +23,6 @@ class App extends React.Component {
       locationData: {},
       yelpData: [],
       locationErr: false,
-      // userFaves: [],
-      // userReviews: []
     }
   }
 
@@ -56,18 +54,6 @@ class App extends React.Component {
       });
   }
 
-  // storeData = (results) => {
-  //   if (results.length > 0) {
-  //     results.forEach(obj => {
-  //       if (obj.Email.includes(this.props.auth0.user.email)) {
-  //         this.setState({
-  //           userFaves: obj.YelpData,
-  //           userReviews: obj.Reviews
-  //         });
-  //       }
-  //     });
-  //   }
-  // }
 
   updateUserData = () => {
     
@@ -84,11 +70,11 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/">
             <Landing
-              // storeData={this.storeData}
             />
           </Route>
           <Route path="/Explore">
             <Explore
+              locationName={this.state.locationName}
               handleLocationSubmit={this.handleLocationSubmit}
               handleSearchEntry={this.handleSearchEntry}
               yelpData={this.state.yelpData}

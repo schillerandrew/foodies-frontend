@@ -5,21 +5,28 @@ import React from "react";
 import LandingImg from "../Images/landingPhoto.jpg"
 
 
-class Landing extends React.Component{
+class Landing extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      createdAccount: false
+    }
+  }
 
   handlePost = async (jwt) => {
-    try{
+    try {
       const config = {
         method: 'POST',
         baseURL: process.env.REACT_APP_SERVER,
         url: '/userData',
-        headers: {Authorization: `Bearer ${jwt}`},
+        headers: { Authorization: `Bearer ${jwt}` },
         data: {
           Email: this.props.auth0.user.email
         }
       }
       await axios(config);
-    } catch (err){
+    } catch (err) {
       console.log('we have an err');
     }
   }
@@ -27,6 +34,9 @@ class Landing extends React.Component{
 
   checkUser = async () => {
     try {
+      this.setState({
+        createdAccount: true
+      })
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
@@ -34,18 +44,18 @@ class Landing extends React.Component{
           method: 'get',
           baseURL: process.env.REACT_APP_SERVER,
           url: '/userData',
-          headers: {Authorization: `Bearer ${jwt}` }
+          headers: { Authorization: `Bearer ${jwt}` }
         }
         let result = await axios(config);
         let userHasAccount = false;
-        if(result.data.length > 0){
+        if (result.data.length > 0) {
           result.data.forEach(obj => {
-            if(obj.Email.includes(this.props.auth0.user.email)){
+            if (obj.Email.includes(this.props.auth0.user.email)) {
               userHasAccount = true;
             }
           });
         }
-        if(!userHasAccount){
+        if (!userHasAccount) {
           this.handlePost(jwt);
         }
       }
@@ -56,16 +66,20 @@ class Landing extends React.Component{
   }
 
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="intro">
-      <div className="intro-text">
-      <h2>Know Your Taste Buds!</h2>
-      <p>Start exploring food spots near you!
-      Never lose track again, Review and Store your favorites like a true foodie!</p>
-      <Button onClick={this.checkUser}>Start</Button>
-      </div>
-      <img  className="pizza-img" src={LandingImg} alt="Pizza"/>
+        <div className="intro-text">
+          <h2>Know Your Taste Buds!</h2>
+          <p>Start exploring food spots near you!
+            Never lose track again, Review and Store your favorites like a true foodie!</p>
+          {this.state.createdAccount ?
+            <Button onClick={this.checkUser}>You have been Added!</Button>
+            :
+            <Button onClick={this.checkUser}>Add User!</Button>
+          }
+        </div>
+        <img className="pizza-img" src={LandingImg} alt="Pizza" />
       </div>
     )
   }

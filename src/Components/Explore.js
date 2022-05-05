@@ -37,6 +37,7 @@ class Explore extends React.Component {
   storeFav = async ()  => {
     const res = await this.props.auth0.getIdTokenClaims();
     const jwt = res.__raw;
+    // console.log(jwt);
     const get = {
       method: 'get',
       baseURL: process.env.REACT_APP_SERVER,
@@ -62,19 +63,23 @@ class Explore extends React.Component {
   render() {
     return (
       <>
+      <div className="locationSearch">
+          <h2>{this.props.locationName}</h2>
         <form onSubmit={this.findClicked} className="search-location">
           <input
             type="text"
             name="location"
             onInput={this.searchEntry}
             placeholder="Search... "
-          />
+            />
           <Button type="submit"><i className="fa-solid fa-magnifying-glass"></i> Find!</Button>
         </form>
+            </div>
         <Carousel
           style={{
             margin: '1em auto',
             width: '80vw',
+            backgroundColor: 'black',
           }}
         >
 
@@ -110,7 +115,7 @@ class Explore extends React.Component {
               src={this.state.storeData.image_url} 
               alt={this.state.storeData.name}
             />
-            {this.state.storeData.name}
+            <h2>{this.state.storeData.name}</h2>
           </Modal.Header>
           <ReviewModal
             title={this.state.storeData}
