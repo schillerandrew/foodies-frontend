@@ -1,7 +1,7 @@
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from "axios";
 import React from "react";
-import { Form, Button, FormLabel } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 class ReviewModal extends React.Component {
 
