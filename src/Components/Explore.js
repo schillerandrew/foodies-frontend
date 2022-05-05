@@ -34,7 +34,7 @@ class Explore extends React.Component {
     })
   }
 
-  storeFav = async ()  => {
+  storeFav = async () => {
     const res = await this.props.auth0.getIdTokenClaims();
     const jwt = res.__raw;
     // console.log(jwt);
@@ -63,18 +63,18 @@ class Explore extends React.Component {
   render() {
     return (
       <>
-      <div className="locationSearch">
+        <div className="locationSearch">
           <h2>{this.props.locationName}</h2>
-        <form onSubmit={this.findClicked} className="search-location">
-          <input
-            type="text"
-            name="location"
-            onInput={this.searchEntry}
-            placeholder="Search... "
+          <form onSubmit={this.findClicked} className="search-location">
+            <input
+              type="text"
+              name="location"
+              onInput={this.searchEntry}
+              placeholder="Search... "
             />
-          <Button type="submit"><i className="fa-solid fa-magnifying-glass"></i> Find!</Button>
-        </form>
-            </div>
+            <Button type="submit"><i className="fa-solid fa-magnifying-glass"></i> Find!</Button>
+          </form>
+        </div>
         <Carousel
           style={{
             margin: '1em auto',
@@ -83,27 +83,35 @@ class Explore extends React.Component {
           }}
         >
 
-        {this.props.yelpData.map((data, id) => {
-          return (
-            <Carousel.Item key={id}>
-              <div className="mask1">
-              <img
-                className="d-block w-100 carouselImg"
-                src={data.image_url}
-                alt={data.name}
-                />
+          {this.props.yelpData.map((data, id) => {
+            return (
+              <Carousel.Item key={id}>
+                <div className="mask1">
+                  <img
+                    className="d-block w-100 carouselImg"
+                    src={data.image_url}
+                    alt={data.name}
+                  />
                 </div>
-              <Carousel.Caption>
-                <h3>{data.name}</h3>
-                <p>{data.location.address1} {data.location.city},{data.location.state} {data.location.zip_code}</p>
-                <Button onClick={() => {this.setState({storeData: data}); this.storeFav();}}><i className="fa-regular fa-star"></i></Button>
-                <Button
-                  onClick={() => this.setState({ showUpdateModal: true, storeData: data })}
-                >Review <i className="fa-solid fa-pen"></i></Button>
-              </Carousel.Caption>
-            </Carousel.Item>
-          )
-        })}
+                <Carousel.Caption>
+                  <div className="carouselStore">
+                  <div>
+                    <a href={data.url}><h3>{data.name}</h3></a>
+                    <p>{data.location.address1} {data.location.city},{data.location.state} {data.location.zip_code}</p>
+                  </div>
+                  <div className="ratings">
+                    <p>{data.price}/$$$$$</p>
+                    <p>{data.rating}/5</p>
+                  </div>
+                  </div>
+                  <Button onClick={() => { this.setState({ storeData: data }); this.storeFav(); }}><i className="fa-regular fa-star"></i></Button>
+                  <Button
+                    onClick={() => this.setState({ showUpdateModal: true, storeData: data })}
+                  >Review <i className="fa-solid fa-pen"></i></Button>
+                </Carousel.Caption>
+              </Carousel.Item>
+            )
+          })}
         </Carousel>
         <Modal
           show={this.state.showUpdateModal}
@@ -111,8 +119,8 @@ class Explore extends React.Component {
         >
           <Modal.Header closeButton>
             <img
-            className="modalImg" 
-              src={this.state.storeData.image_url} 
+              className="modalImg"
+              src={this.state.storeData.image_url}
               alt={this.state.storeData.name}
             />
             <h2>{this.state.storeData.name}</h2>
