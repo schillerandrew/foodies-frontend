@@ -4,8 +4,6 @@ import { withAuth0 } from '@auth0/auth0-react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Faves.css";
 
-
-import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
