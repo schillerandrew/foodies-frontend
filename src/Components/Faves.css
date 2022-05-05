@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.buttonDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  margin: 50px;
+}
+
+.restaurantheader {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  border: 5px solid purple;
+}
+
+.restPhoto {
+  border: 3px solid black;
+  height: 300px;
+  width: 400px;
+}
+
+.restName {
+  color: #9A031E;
+  margin-bottom: 20px;
+}
+
+.deleteRest {
+  /* margin-top: 10px; */
+}
+
+.restAddy {
+  margin-bottom: 30px;
+}
+
+.reviewTitle {
+  color: #9A031E;
+  margin-bottom: 30px;
+}
+
+.reviewText {
+  /* margin-top: 10px; */
+}
+
+
+
+
+
