@@ -56,7 +56,7 @@ class App extends React.Component {
 
 
   updateUserData = () => {
-    
+
   }
 
   componentDidMount() {
@@ -78,8 +78,6 @@ class App extends React.Component {
               handleLocationSubmit={this.handleLocationSubmit}
               handleSearchEntry={this.handleSearchEntry}
               yelpData={this.state.yelpData}
-              userFaves={this.state.userFaves}
-              userReviews={this.state.userReviews}
             />
           </Route>
           <Route path="/Faves">
