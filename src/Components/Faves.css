@@ -1,3 +1,13 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.button {
+  
+}
+
 .restaurantheader {
   display: grid;
   grid-template-columns: repeat(5, 1fr); 
@@ -8,9 +18,12 @@
 
 .restPhoto {
   border: 3px solid black;
+  height: 300px;
+  width: 400px;
 }
 
 .restName {
+  color: #9A031E;
 }
 
 .deleteRest {
