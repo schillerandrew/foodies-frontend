@@ -132,84 +132,97 @@ class Faves extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="buttonDiv">
-          <Button
-            onClick={this.getFavesAndReviews}
-            className="button"
-          >Show My Faves &#38; Raves!</Button>
-        </div>
-        {this.state.Faves.length ?
-          this.state.Faves.map((data, id) => {
-            return (
-              <>
-                <Container className="container">
-                  <Card style={{ width: '40rem' }}>
-                    <Card.Header className="restaurantHeader">
-                      <Row>
-                        <Col>
-                          {/* restaurant PHOTO */}
-                          <Card.Img
-                            variant="left"
-                            src={data.image_url}
-                            className="restPhoto"
-                          />
-                        </Col>
-                        <Col>
-                          {/* restaurant NAME */}
-                          <Card.Title
-                            className="restName">{data.name}</Card.Title>
+      <div className="favesraves">
+        <div className="restaurants">
+        <h2>📍 Faves</h2>
+          {this.state.Faves.length ?
+            this.state.Faves.map((data, id) => {
+              return (
+                <>
+                  <Container className="container">
+                    <Card className="restaurantCard">
+                      <Card.Header className="restaurantHeader">
+                        <Row>
+                          <Col>
+                            {/* restaurant PHOTO */}
+                            <Card.Img
+                              variant="left"
+                              src={data.image_url}
+                              className="restPhoto"
+                            />
+                          </Col>
+                          <Col className="restaurantCol">
+                            {/* restaurant NAME */}
+                            <Card.Title
+                              className="restName">{data.name}</Card.Title>
 
-                          {/* restaurant ADDRESS */}
-                          <Card.Title className="restAddy">📍 {data.location.display_address[0]}
-                          </Card.Title>
+                            {/* restaurant ADDRESS */}
+                            <Card.Title className="restAddy">📍 {data.location.display_address[0]}
+                            </Card.Title>
 
-                          {/* this button shares*/}
-                          {/* <Button
+                            {/* this button shares*/}
+                            {/* <Button
                             variant="info"
                             className="share"
                           >
                             <i className="fa fa-share"></i>
                           </Button> */}
 
-                          {/* this button deletes a restaurant */}
-                          <Button
-                            onClick={() => { this.setState({ storeData: data }); this.handleFaveDelete(); }}
-                            className="deleteRest"
-                          >
-                            <i className="fa fa-trash-o"></i>
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Card.Header>
-                  </Card>
-                </Container>
-              </>
-            )
-          })
-          :
-          <></>
-        }
-        {this.state.Reviews.length ?
-          this.state.Reviews.map((data, id) => {
-            return (
-              <>
-                <Container className="container">
-                  <Card style={{ width: '40rem' }}>
-                    <Card.Body>
-                      <Row>
-                        <Card.Title >💬 Raves</Card.Title>
-                      </Row>
+                            {/* this button deletes a restaurant */}
+                            <Button
+                              onClick={() => { this.setState({ storeData: data }); this.handleFaveDelete(); }}
+                              className="deleteRest"
+                            >
+                              <i className="fa fa-trash-o"></i>
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Card.Header>
+                    </Card>
+                  </Container>
+                </>
+              )
+            })
+            :
+            <></>
+          }
+        </div>
 
-                      {/* restaurant review */}
-                      <Row>
-                        <Col>
-                          <Card.Title className="reviewTitle">{data.storeName}</Card.Title>
-                          <Card.Text className="reviewText">{data.description}</Card.Text>
-                        </Col>
-                        <Col>
+        {/* BUTTON */}
+        <div className="buttonDiv">
+          <Button
+            style={{
+              height: "100px",
+              width: "200px"
+            }}
+            onClick={this.getFavesAndReviews}
+            className="button"
+          >Show My Faves &#38; Raves!</Button>
+        </div>
 
-                          {/* this button updates a review
+        {/* RAVES */}
+        <div className="reviews">
+          <h2>💬 Raves</h2>
+          {this.state.Reviews.length ?
+            this.state.Reviews.map((data, id) => {
+              return (
+                <>
+                  <Container className="container">
+                    <Card className="reviewCard">
+                      <Card.Body>
+                        <Row>
+                          <Card.Title ></Card.Title>
+                        </Row>
+
+                        {/* restaurant review */}
+                        <Row>
+                          <Col className="reviewCol">
+                            <Card.Title className="reviewTitle">{data.storeName}</Card.Title>
+                            <Card.Text className="reviewText">{data.description}</Card.Text>
+                          </Col>
+                          <Col>
+
+                            {/* this button updates a review
                           <Button
                             variant="primary"
                             onClick={this.showUpdateModalHandler}
@@ -217,24 +230,25 @@ class Faves extends React.Component {
                             <i className="fa fa-pencil"></i>
                           </Button> */}
 
-                          {/* this button deletes a review */}
-                          <Button
-                            variant="primary"
-                            onClick={() => { this.setState({ reviewData: data }); this.handleReviewDelete(); }}
-                          >
-                            <i className="fa fa-trash-o"></i>
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                  </Card>
-                </Container>
-              </>
-            )
-          })
-          :
-          <></>
-        }
+                            {/* this button deletes a review */}
+                            <Button
+                              variant="primary"
+                              onClick={() => { this.setState({ reviewData: data }); this.handleReviewDelete(); }}
+                            >
+                              <i className="fa fa-trash-o"></i>
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
+                  </Container>
+                </>
+              )
+            })
+            :
+            <></>
+          }
+        </div>
         {/* this modal confirms a delete */}
         <Modal
           show={this.state.showDelete}
@@ -295,7 +309,7 @@ class Faves extends React.Component {
             </Card>
           </Modal.Body>
         </Modal>
-      </>
+      </div>
     )
   }
 }
