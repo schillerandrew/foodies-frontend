@@ -10,21 +10,56 @@
 }
 
 .button {
-  margin: 50px;
+  margin: 20px;
 }
 
-.restaurantheader {
+.favesraves {
+  display: flex;
+  justify-content: center;
+}
+
+.restaurants {
+
+}
+
+.reviews {
+
+}
+
+.restaurantCard {
+  width: 40rem;
+  margin: 0.5vw;
+}
+
+.reviewCard {
+  width: 40rem;
+  margin: 0.5vw;
+}
+
+/* .restaurantheader {
   display: grid;
   grid-template-columns: repeat(5, 1fr); 
   gap: 10px;
   grid-auto-rows: minmax(100px, auto);
   border: 5px solid purple;
-}
+} */
 
 .restPhoto {
   border: 3px solid black;
   height: 300px;
   width: 400px;
+}
+
+.restaurantCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reviewCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .restName {
