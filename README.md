@@ -1,4 +1,4 @@
-> # Foodies
+# Foodies
 
 > ## TEAM R-A-M
 
@@ -12,8 +12,10 @@
 
 > ## Architecture
 
-### Domain model
+- Domain model
 ![Domain model](https://raw.githubusercontent.com/schillerandrew/foodies-frontend/main/src/Images/domain-model.jpg)
 
-### Wireframe
+- Wireframe
 ![Wireframe](https://raw.githubusercontent.com/schillerandrew/foodies-frontend/main/src/Images/wireframe.jpg)
+
+- [Trello (Kanban board)](https://trello.com/b/9tUkeznp/foodies)
