@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import React from "react";
-import LandingImg from "../Images/landingPhoto.jpg"
+import LandingImg from "../Images/landing-photo.jpg"
 
 
 class Landing extends React.Component {
