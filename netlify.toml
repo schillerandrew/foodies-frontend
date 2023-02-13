@@ -4,6 +4,6 @@
   status = 200
   
 [[headers]]
-  for = "/*"
+  for = "https://foodies-schiller.netlify.app/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
