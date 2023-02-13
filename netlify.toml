@@ -1,4 +1,9 @@
+[[redirects]]
+  from = "/*"
+  to = "/public/index.html"
+  status = 200
+  
 [[headers]]
   for = "/*"
     [headers.values]
-    Access-Control-Allow-Origin = "https://foodies-schiller.netlify.app"
+    Access-Control-Allow-Origin = "*"
