@@ -1,6 +1,6 @@
 [[redirects]]
-  from = "/*"
-  to = "https://foodies-schiller.cyclic.app/"
+  from = "/api/*"
+  to = "https://foodies-schiller.cyclic.app/:splat"
   status = 200
   force = true
 
