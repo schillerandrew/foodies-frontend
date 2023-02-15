@@ -1,9 +1,15 @@
 [[redirects]]
   from = "/*"
+  to = "https://foodies-schiller.cyclic.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
   to = "index.html"
   status = 200
   
 [[headers]]
-  for = "https://foodies-schiller.netlify.app/*"
+  for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
