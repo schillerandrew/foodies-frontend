@@ -27,7 +27,6 @@ class ReviewModal extends React.Component {
     e.preventDefault();
     const res = await this.props.auth0.getIdTokenClaims();
     const jwt = res.__raw;
-    // console.log(jwt);
     const config = {
       method: 'get',
       baseURL: process.env.REACT_APP_SERVER,

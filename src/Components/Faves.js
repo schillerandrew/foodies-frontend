@@ -30,10 +30,8 @@ class Faves extends React.Component {
 
   getFavesAndReviews = async () => {
     try {
-      // console.log(this.props.auth0);
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw;
-      // console.log('jwt', jwt);
       const config = {
         method: 'get',
         baseURL: process.env.REACT_APP_SERVER,
@@ -57,7 +55,6 @@ class Faves extends React.Component {
   handleFaveDelete = async () => {
     const res = await this.props.auth0.getIdTokenClaims();
     const jwt = res.__raw;
-    // console.log(jwt);
     ////// GET
     const getConfig = {
       method: 'get',
@@ -89,7 +86,6 @@ class Faves extends React.Component {
   handleReviewDelete = async () => {
     const res = await this.props.auth0.getIdTokenClaims();
     const jwt = res.__raw;
-    // console.log(jwt);
     ////// GET
     const getConfig = {
       method: 'get',

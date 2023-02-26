@@ -37,7 +37,6 @@ class Explore extends React.Component {
   storeFav = async () => {
     const res = await this.props.auth0.getIdTokenClaims();
     const jwt = res.__raw;
-    // console.log(jwt);
     const get = {
       method: 'get',
       baseURL: process.env.REACT_APP_SERVER,
